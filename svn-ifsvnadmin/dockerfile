@@ -10,7 +10,7 @@ RUN set -x && \
     unzip svnadmin-${SVNADMIN_VERSION}.zip && \
     cp -rf iF.SVNAdmin-stable-${SVNADMIN_VERSION} /var/www/html/svnadmin && \
     chmod -R 777 /var/www/html/svnadmin/data && \
-    mkdir /etc/pki/svnadmin /var/log/svn /var/www/svn && \
+    mkdir /etc/pki/svnadmin /var/www/svn && \
     touch /var/www/svn/svn_auth_file.conf && \
     rm -rf svnadmin-${SVNADMIN_VERSION}.zip iF.SVNAdmin-stable-${SVNADMIN_VERSION}
 COPY privkey.pem server.crt /etc/pki/svnadmin/
@@ -27,7 +27,8 @@ RUN set -x && \
     chmod 644 /var/www/html/svnadmin/data/config.ini && \
     chmod 644 /var/www/html/svnadmin/data/userroleassignments.ini && \
     chmod 644 /var/www/svn/svn_auth_file.conf && \
-    chmod 644 /var/www/svn/svn_user_file.conf
+    chmod 644 /var/www/svn/svn_user_file.conf && \
+    usermod -a -G root apache
 
 EXPOSE 80 443
 
