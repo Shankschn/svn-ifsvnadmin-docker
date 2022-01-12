@@ -10,7 +10,7 @@ services:
     volumes:
       - svnadmin_data:/var/www/html/svnadmin/data
       - svn:/var/www/svn
-      - log:/var/log/svnlog
+      - httpd_log:/var/log/httpd
       - httpd_conf.d:/etc/httpd/conf.d
       - httpd_ssl:/etc/pki/svnadmin
 
@@ -27,12 +27,12 @@ volumes:
       o: bind
       type: none
       device: /var/svn_svnadmin/svn
-  log:
+  httpd_log:
     driver: local
     driver_opts:
       o: bind
       type: none
-      device: /var/svn_svnadmin/log
+      device: /var/svn_svnadmin/httpd_log
   httpd_conf.d:
     driver: local
     driver_opts:
