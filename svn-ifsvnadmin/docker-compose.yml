@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    container_name: svn-ifsvnadmin
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - svnadmin_data:/var/www/html/svnadmin/data
+      - svn:/var/www/svn
+      - log:/var/log/svnlog
+      - httpd_conf.d:/etc/httpd/conf.d
+      - httpd_ssl:/etc/pki/svnadmin
+
+volumes:
+  svnadmin_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /var/svn_svnadmin/svnadmin_data
+  svn:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /var/svn_svnadmin/svn
+  log:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /var/svn_svnadmin/log
+  httpd_conf.d:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /var/svn_svnadmin/httpd_conf.d
+  httpd_ssl:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: /var/svn_svnadmin/httpd_ssl
+
